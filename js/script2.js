@@ -17,13 +17,22 @@ function creaGriglia(){ // funzione per evitare di scrivere a mano 36 div con cl
 }
 
 function addSquareClickListener() { // listener su tutti gli elementi con classe .square (tutti i quadratini)
-  var target = $(".square");
-  target.click(compileSquare);
+  $(".square").click(function(){
+
+    var target = $(this);
+
+    if (target.hasClass("clickable")) {
+
+      compileSquare(target);
+
+      target.removeClass("clickable");  // rimuovo la classe clickable così ogni singolo quadratino è cliccabile soltanto una volta
+    }
+  });
 }
 
-function compileSquare() {
+function compileSquare(target) {
 
-  var target = $(this); // il target è il quadratino cliccato. passerò il target alla funzione che cambia il background e il testo all'interno del quadratino
+   // il target è il quadratino cliccato. passerò il target alla funzione che cambia il background e il testo all'interno del quadratino
 
   $.ajax({
     url: "https://flynn.boolean.careers/exercises/api/random/int",
@@ -44,7 +53,7 @@ function compileSquare() {
 
 function printSquare(num, target){ // la funzione stampa il numero nel quadratino e assegna la classe con sfondo corrispondente a seconda se il numero è minore o superiore a 5
 
-  target.removeClass("bg-y bg-g"); // se il quadrato fosse già stato cliccato prima tolgo tutte le classi che colorano il background poi le riassegno con l'if
+
 
   if (num <=5) {
     target.addClass("bg-y");
@@ -64,6 +73,6 @@ function addBtnAzzeraListener() { // al click su bottone
 function azzera() { // tutti gli elementi con classe square avranno testo stringa vuota e verranno rimosse le classi che danno colore allo sfondo
   var target = $(".square");
 
-  target.removeClass("bg-y bg-g");
+  target.removeClass("bg-y bg-g").addClass("clickable");
   target.text("");
 }
