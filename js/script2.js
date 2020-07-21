@@ -44,6 +44,9 @@ function compileSquare() {
 }
 
 function printSquare(num, target){ // la funzione stampa il numero nel quadratino e assegna la classe con sfondo corrispondente a seconda se il numero è minore o superiore a 5
+
+  target.removeClass("bg-y bg-g"); // se il quadrato fosse già stato cliccato prima tolgo tutte le classi che colorano il background poi le riassegno con l'if
+
   if (num <=5) {
     target.addClass("bg-y");
   } else{
