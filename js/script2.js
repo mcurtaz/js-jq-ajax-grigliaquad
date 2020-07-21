@@ -12,7 +12,6 @@ function creaGriglia(){ // funzione per evitare di scrivere a mano 36 div con cl
     var template = $("#template .square").clone();
     var target = $("#griglia");
 
-    template.attr("data-id", i);
     target.append(template);
   }
 }
